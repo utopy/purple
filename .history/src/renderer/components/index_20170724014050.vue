@@ -25,7 +25,7 @@ export default {
     getPosts(name){
       purple.getSubredditPosts(name, (err, res)=>{
       let o = res;
-      o.subreddit_name = name
+      o.subreddit_name = u
       console.log(o)
       this.$store.dispatch("updateSubredditPosts", o)
       this.posts = [...o.posts, ...this.posts]

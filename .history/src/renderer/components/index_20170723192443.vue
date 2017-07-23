@@ -1,6 +1,6 @@
 <template>
   <div>
-    <headbar @subredditSearch="getPosts($event)" v-bind:title="subreddit"></headbar>
+    <head v-bind:title="subreddit"></head>
     <posts v-bind:posts="posts"></posts>
   </div>
 </template>
@@ -18,21 +18,6 @@ export default {
     }
   },
   components: {posts, headbar},
-  methods: {
-    search(n){
-      console.log(n)
-    },
-    getPosts(name){
-      purple.getSubredditPosts(name, (err, res)=>{
-      let o = res;
-      o.subreddit_name = name
-      console.log(o)
-      this.$store.dispatch("updateSubredditPosts", o)
-      this.posts = [...o.posts, ...this.posts]
-      this.subreddit = o.subreddit_name
-      })
-    }
-  },
   mounted(){
     let u = "node"
     purple.getSubredditPosts(u, (err, res)=>{

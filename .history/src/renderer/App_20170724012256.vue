@@ -28,7 +28,6 @@
     height: 100vh;
     width: 200px;
     float: left;
-    z-index: 102;
   }
 
   .wrapper{

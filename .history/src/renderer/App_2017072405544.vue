@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" stype="overflow: hidden">
     <div class="drag-area"></div>
     <div class="content">
       <div class="sidebar">
-        <sidebar></sidebar>
+        sidebar
       </div>
       <div class="wrapper">
         <router-view></router-view>
@@ -20,45 +20,28 @@
   }
 </script>
 
+<style>
+  *{
+    margin: 0;
+  }
+</style>
+
 
 <style scoped>
   /* CSS */
-  .sidebar {
-    position: fixed;
-    height: 100vh;
-    width: 200px;
-    float: left;
-    z-index: 102;
-  }
 
-  .wrapper{
-    width: calc(100vw - 200px);
-    position: absolute;
-    height: 100%;
-    right: 0;
-  }
   .content{
-    display: inline-flex;
-    flex-direction: row;
-    height: 100vh;
+    display: inline-block
   }
   .drag-area{
     -webkit-app-region: drag;
     height: 22px;
-    background: transparent;
     width: 100vw;
-    position: fixed;
   }
 
   #app{
     height:100vh;
     width:100vw;
-  }
-</style>
-
-
-<style>
-  *{
-    margin: 0;
+    background: #E07DED
   }
 </style>

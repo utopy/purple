@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-    <div class="drag-area"></div>
+  <div id="app" stype="overflow: hidden">
     <div class="content">
       <div class="sidebar">
         <sidebar></sidebar>
@@ -28,7 +27,6 @@
     height: 100vh;
     width: 200px;
     float: left;
-    z-index: 102;
   }
 
   .wrapper{
@@ -40,7 +38,6 @@
   .content{
     display: inline-flex;
     flex-direction: row;
-    height: 100vh;
   }
   .drag-area{
     -webkit-app-region: drag;

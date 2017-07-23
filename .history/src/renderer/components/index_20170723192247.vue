@@ -1,6 +1,6 @@
 <template>
   <div>
-    <headbar @subredditSearch="getPosts($event)" v-bind:title="subreddit"></headbar>
+    <header v-bind:title="subreddit"></header>
     <posts v-bind:posts="posts"></posts>
   </div>
 </template>
@@ -8,7 +8,7 @@
 <script>
 import '@/assets/purple'
 import posts from '@/components/posts'
-import headbar from '@/components/head'
+import header from '@/components/header'
 import store from '@/store'
 export default {
   data(){
@@ -17,22 +17,7 @@ export default {
       subreddit: "",
     }
   },
-  components: {posts, headbar},
-  methods: {
-    search(n){
-      console.log(n)
-    },
-    getPosts(name){
-      purple.getSubredditPosts(name, (err, res)=>{
-      let o = res;
-      o.subreddit_name = name
-      console.log(o)
-      this.$store.dispatch("updateSubredditPosts", o)
-      this.posts = [...o.posts, ...this.posts]
-      this.subreddit = o.subreddit_name
-      })
-    }
-  },
+  components: {posts, header},
   mounted(){
     let u = "node"
     purple.getSubredditPosts(u, (err, res)=>{

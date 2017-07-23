@@ -21,7 +21,7 @@ function createWindow () {
     height: 600,
     useContentSize: true,
     width: 800,
-    titleBarStyle: "hidden"
+    titleBarStyle: "hiddem"
   })
 
   mainWindow.loadURL(winURL)
