@@ -39,7 +39,7 @@ export default {
   },
   computed:{
     ...mapGetters(['getViewPosts'])
-  },
+  }
   mounted(){
     let u = "node"
     purple.getSubredditPosts(u, (err, res)=>{

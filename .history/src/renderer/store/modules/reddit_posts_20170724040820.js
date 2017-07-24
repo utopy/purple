@@ -58,8 +58,16 @@ const actions = {
 }
 
 const getters = {
-    getViewPosts(state){
-        return state.viewPosts
+    getPosts(state){
+        return (name)=>{
+            state.subreddits.forEach((n)=>{
+                console.log(n)
+                if(n.subreddit_name === name){
+                    console.log(n)
+                    return 
+                }
+            },this)
+        }
     }
 }
 

@@ -19,26 +19,8 @@ const mutations = {
 }
 
 const actions = {
-    getPosts({commit}, name){
-        let exists = false
-        state.subreddits.forEach((s)=>{
-            if(s.subreddit_name === name){
-                exists = true
-                commit("UPDATE_VIEW_POSTS", s)
-            }
-        }, this)
-        if(exists === false){
-            purple.getSubredditPosts(name, (err, res)=>{
-                if(err){
-                    console.log(err)
-                } else {
-                    console.log(res)
-                    res.subreddit_name = name
-                    commit("ADD_SUBREDDIT", res)
-                    commit("UPDATE_VIEW_POSTS", res)
-                }
-            })
-        }
+    getPosts({commit}, data, callback){
+        console.log(callback())
     },
     updateSubredditPosts({commit}, data){
         let exists = false
@@ -58,8 +40,16 @@ const actions = {
 }
 
 const getters = {
-    getViewPosts(state){
-        return state.viewPosts
+    getPosts(state){
+        return (name)=>{
+            state.subreddits.forEach((n)=>{
+                console.log(n)
+                if(n.subreddit_name === name){
+                    console.log(n)
+                    return 
+                }
+            },this)
+        }
     }
 }
 

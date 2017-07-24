@@ -25,6 +25,7 @@ export default {
     },
     getPosts(name){
       this.$store.dispatch("getPosts", name)
+      this.subreddit = name
     }
     // getPosts(name){
     //   purple.getSubredditPosts(name, (err, res)=>{

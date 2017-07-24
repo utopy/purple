@@ -58,7 +58,7 @@ const actions = {
 }
 
 const getters = {
-    getViewPosts(state){
+    getPosts(state){
         return state.viewPosts
     }
 }

@@ -1,7 +1,7 @@
 <template>
   <div>
     <headbar @subredditSearch="getPosts($event)" v-bind:title="subreddit"></headbar>
-    <posts v-bind:posts="getViewPosts"></posts>
+    <posts v-bind:posts="posts"></posts>
   </div>
 </template>
 
@@ -38,8 +38,8 @@ export default {
     // }
   },
   computed:{
-    ...mapGetters(['getViewPosts'])
-  },
+    ...mapGetters(['getPosts'])
+  }
   mounted(){
     let u = "node"
     purple.getSubredditPosts(u, (err, res)=>{

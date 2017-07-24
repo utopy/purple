@@ -1,12 +1,11 @@
 <template>
   <div>
     <headbar @subredditSearch="getPosts($event)" v-bind:title="subreddit"></headbar>
-    <posts v-bind:posts="getViewPosts"></posts>
+    <posts v-bind:posts="posts"></posts>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import '@/assets/purple'
 import posts from '@/components/posts'
 import headbar from '@/components/head'
@@ -24,7 +23,9 @@ export default {
       console.log(n)
     },
     getPosts(name){
-      this.$store.dispatch("getPosts", name)
+      this.$store.dispatch("getPosts", name, ()=>{
+        return "ciao"
+      } )
     }
     // getPosts(name){
     //   purple.getSubredditPosts(name, (err, res)=>{
@@ -36,9 +37,6 @@ export default {
     //   this.subreddit = o.subreddit_name
     //   })
     // }
-  },
-  computed:{
-    ...mapGetters(['getViewPosts'])
   },
   mounted(){
     let u = "node"
