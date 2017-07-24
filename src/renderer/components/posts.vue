@@ -2,7 +2,13 @@
   <div class="container">
       <div class="posts">
         <div class="post" v-for="post in posts">
-          {{post.data.title}}
+          <p class="title">
+              {{post.data.title}}
+          </p>
+          <p class="infos">
+               Author {{post.data.author}}
+          </p>
+          <div class="divider"></div>
         </div>
       </div>
   </div>
@@ -20,7 +26,6 @@ export default {
 </script>
 <style scoped>
     .container{
-        background: #E07DED;
         width: 100%;
     }
 
@@ -28,15 +33,21 @@ export default {
         margin-bottom: 20px;
     }
 
+    .title{
+        font-weight: bold;
+    }
+
     .posts{
         overflow-y: scroll;
     }
 
+
     .post{
-        height: 100px;
-        background: white;
+        min-height: 60px;
+        border-bottom: 2px solid #E71AEF;
         width: 80%;
         margin: auto;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        
     }
 </style>

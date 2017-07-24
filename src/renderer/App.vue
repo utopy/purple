@@ -60,5 +60,6 @@
 <style>
   *{
     margin: 0;
+    font-family: arial
   }
 </style>

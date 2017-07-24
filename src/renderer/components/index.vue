@@ -42,13 +42,7 @@ export default {
   },
   mounted(){
     let u = "node"
-    purple.getSubredditPosts(u, (err, res)=>{
-      let o = res;
-      o.subreddit_name = u
-      this.$store.dispatch("updateSubredditPosts", o)
-      this.posts = [...o.posts, ...this.posts]
-      this.subreddit = o.subreddit_name
-    }, {})
+    this.$store.dispatch("getPosts", u)
   }
 
 }
