@@ -15,6 +15,10 @@ const mutations = {
         state.after = res.after
         state.before = res.before
         state.viewPosts = [...res.posts]
+    },
+    LOAD_MORE_POSTS (state, res){
+        state.after = res.after;
+        state.viewPosts = [...state.viewPosts, ...res.posts]
     }
 }
 
@@ -40,20 +44,15 @@ const actions = {
             })
         }
     },
-    updateSubredditPosts({commit}, data){
-        let exists = false
-        state.subreddits.forEach((s, i)=>{
-            if(s.subreddit_name === data.subreddit_name){
-                exists = true
-                console.log("exists")
+    loadMorePosts({commit}, name){
+        purple.getSubredditPosts(name, (err, res)=>{
+            if(err){
+                console.log(err)
+            } else {
+                console.log(res)
+                commit("LOAD_MORE_POSTS", res)
             }
-        }, this)
-        if(exists){
-            commit("UPDATE_VIEW_POSTS", data)
-        } else {
-            commit("UPDATE_VIEW_POSTS", data)
-            commit("ADD_SUBREDDIT", data)
-        }
+        },{after: state.after})
     }
 }
 

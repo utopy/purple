@@ -1,7 +1,10 @@
 <template>
-  <div>
+  <div class="main-wrapper">
     <headbar @subredditSearch="getPosts($event)" v-bind:title="subreddit"></headbar>
     <posts v-bind:posts="getViewPosts"></posts>
+    <div class="button" @click="loadMore">
+            Load More
+        </div>
   </div>
 </template>
 
@@ -15,7 +18,7 @@ export default {
   data(){
     return{
       posts: [],
-      subreddit: "",
+      subreddit: "node",
     }
   },
   components: {posts, headbar},
@@ -25,6 +28,10 @@ export default {
     },
     getPosts(name){
       this.$store.dispatch("getPosts", name)
+      this.subreddit = name
+    },
+    loadMore(){
+      this.$store.dispatch("loadMorePosts", this.subreddit)
     }
     // getPosts(name){
     //   purple.getSubredditPosts(name, (err, res)=>{
@@ -50,6 +57,20 @@ export default {
 
 <style>
 
+    .main-wrapper{
+      background: #322836;
+    }
+    .button{
+        width: 150px;
+        height: auto;
+        padding: 10px;
+        background: #2F1847;
+        text-align: center;
+        color: white;
+        margin: auto;
+        margin-bottom: 30px;
+        border-radius: 25px;
+    }
 
 </style>
 

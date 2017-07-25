@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+import store from '@/store'
 export default {
     props: ['posts'],
     name: "posts",
@@ -21,6 +22,8 @@ export default {
         return{
 
         }
+    },
+    methods:{
     }
 }
 </script>
@@ -44,10 +47,17 @@ export default {
 
     .post{
         min-height: 60px;
-        border-bottom: 2px solid #E71AEF;
+        padding: 20px;
         width: 80%;
+        background-color: #F4F4F4;
         margin: auto;
-        margin-bottom: 30px;
-        
+        margin-bottom: 30px;  
+        border-bottom: 2px solid #E71AEF; 
+    }
+
+    .infos{
+        font-size: 12px;
+        margin-top: 10px;
+        text-align: right;
     }
 </style>

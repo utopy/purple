@@ -38,14 +38,12 @@
             console.log(this)
         }
 
-        _purple.getSubredditPosts = function(subreddit, callback, options){
-            let u = `https://www.reddit.com/r/${subreddit}/.json`
-            if(options){
-                u+='?'
-                let o = options
-                let p= Object.keys(o)
+        _purple.returnQuery = function(query){
+            let u = "?"
+            if(query){
+                let o = query
+                let p = Object.keys(o)
                 p.forEach((n, i)=>{
-                    console.log(i)
                     u+= `${n}=${o[n]}`
                     if(p.length > 0){
                         if(p.length -1 !== i){
@@ -53,7 +51,14 @@
                         }
                     }
                 },this)
-                
+                return u
+            }
+        }
+
+        _purple.getSubredditPosts = function(subreddit, callback, options){
+            let u = `https://www.reddit.com/r/${subreddit}/.json`
+            if(options){
+                u += this.returnQuery(options)
             }
 
             request("GET", u, {}, (err, res)=>{
@@ -70,6 +75,12 @@
                     callback(e, response)
                 }
             })
+        }
+
+        _purple.searchSubreddit = function(query, callback){
+            let u = "https://www.reddit.com/api/search_subreddit"
+            u += this.returnQuery(query)
+            request("POST", u, {}, )
         }
 
 
