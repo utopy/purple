@@ -13,6 +13,7 @@
 </template>
 
 <script>
+  import '@/assets/bubbles.css'
   import sidebar from '@/components/sidebar'
   export default {
     name: 'purple',

@@ -13,8 +13,8 @@
             <div v-if="o.name!=='subreddits'"class="menu-voice" v-for="v in o.voices" :class="{active: $route.name === v}">
                 <router-link :to="v">{{capitalize(v)}}</router-link>
             </div>
-            <div v-else class="menu-voice">
-                <a @click="loadFavoriteSubreddit(v)">{{capitalize(v)}}</a>
+            <div v-else class="menu-voice" :class="{activeSub: $store.state.reddit_posts.current === v}">
+                <div @click="loadFavoriteSubreddit(v)">{{capitalize(v)}}</div>
             </div>
         </div>
     </div>
@@ -85,6 +85,7 @@ export default {
     font-size: 12px;
     padding: 5px;
     border: 1px solid white;
+    cursor: pointer;
 }
 
 
@@ -96,6 +97,11 @@ a{
 
 .active{
     border: 1px solid #C32373;
+}
+
+.activeSub{
+    border-left: 1px solid #C32373;
+    border-right: 1px solid #C32373
 }
 
 </style>

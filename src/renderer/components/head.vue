@@ -4,15 +4,15 @@
             <div class="input">
                 <input type="text" v-model="input" v-on:keyup.enter="search">
             </div>
-            <div class="button"></div>
+            <div class="button">Search</div>
         </div>
         <div class="title">
-            r/{{capitalize(title)}}
+            r/{{capitalize(getCurrentTitle)}}
         </div>
 
         <div class="save">
-            <span v-if="!isFavorite(title)" @click="$store.dispatch('favoriteSubreddit', title)">Save Shortcut</span>
-            <span v-else @click="$store.dispatch('unfavoriteSubreddit', title)">remove Shortcut</span>
+            <span v-if="!isFavorite(title)" @click="$store.dispatch('favoriteSubreddit', title)"><img width="10px"src="../assets/svg/plus.svg" alt=""></span>
+            <span v-else @click="$store.dispatch('unfavoriteSubreddit', title)"><img width="10px"src="../assets/svg/menus.svg" alt=""></span>
         </div>
         
     </div>
@@ -30,33 +30,39 @@ export default {
     methods:{
         search(){
             this.$emit("subredditSearch", this.input)
+            this.input=""
         },
         capitalize(o){
         return o[0].toUpperCase() + o.slice(1, o.length)
         }
     },
     computed:{
-        ...mapGetters(['isFavorite'])
+        ...mapGetters(['isFavorite', 'getCurrentTitle'])
     }
 }
 </script>
 <style scoped>
 
     .container{
+        padding-top: 40px;
         width: 80%;
-        padding: 20px;
         margin: auto;
         height: auto;
+        padding-bottom:40px;
     }
 
     .search-bar{
-        display: flex;
+        display: inline-block;
         width: 100%;
         height: 30px;
         margin-bottom: 20px;
     }
+
+    .search-bar div{
+        display: inline-block;
+    }
     .search-bar .input{
-        width: calc(100% - 40px);
+        width: calc(100% - 100px);
         height: 30px;
     }
 
@@ -76,11 +82,17 @@ export default {
         outline: none;
     }
     .search-bar .button{
-        width: 40px;
+        width: 100px;
         padding: 0;
         height: 30px;
         display: inline-block;
-        background: #C32373
+        background: #C32373;
+        float: right;
+        text-align:center;
+        line-height:30px;
+        color:white;
+        font-weight: 300;
+        font-size:12px
     }
 
     .title{
@@ -91,8 +103,12 @@ export default {
     }
 
     .save{
-        float:right;
+        display: inline;
+        margin-left: 10px;
         font-weight: 400;
+        text-align: center;
+        width: 15px;;
+        height: 15px;
         font-size: 10px;
     }
 </style>

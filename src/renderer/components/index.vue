@@ -4,7 +4,7 @@
     <posts v-bind:posts="getViewPosts"></posts>
     <div class="button" @click="loadMore">
             Load More
-        </div>
+    </div>
   </div>
 </template>
 
@@ -55,7 +55,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
     .main-wrapper{
       background: #D8D8D8;
@@ -69,7 +69,6 @@ export default {
         color: white;
         margin: auto;
         margin-bottom: 30px;
-        border-radius: 25px;
     }
 
 </style>

@@ -4,7 +4,8 @@ const state = {
     after: null,
     before: null,
     viewPosts:[],
-    subreddits:[]
+    subreddits:[],
+    current: ""
 }
 
 const mutations = {
@@ -20,6 +21,9 @@ const mutations = {
     LOAD_MORE_POSTS (state, res){
         state.after = res.after;
         state.viewPosts = [...state.viewPosts, ...res.posts]
+    },
+    UPDATE_CURRENT (state, name){
+        state.current = name
     }
 }
 
@@ -35,6 +39,7 @@ const actions = {
                     console.log("old cache")
                 }
                 commit("UPDATE_VIEW_POSTS", s)
+                commit("UPDATE_CURRENT", name)
             }
         }, this)
         if(exists === false){
@@ -47,6 +52,7 @@ const actions = {
                     res.created = Date.now()
                     commit("ADD_SUBREDDIT", res)
                     commit("UPDATE_VIEW_POSTS", res)
+                    commit("UPDATE_CURRENT", name)
                 }
             })
         }
@@ -66,6 +72,9 @@ const actions = {
 const getters = {
     getViewPosts(state){
         return state.viewPosts
+    },
+    getCurrentTitle(state){
+        return state.current
     }
 }
 
