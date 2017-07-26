@@ -1,5 +1,6 @@
 (function (window) {
     function purple() {
+        let P_TYPES= [{id:"t1", name:"comment"},{id:"t2", name:"account"},{id:"t3", name:"link"}]
         let request = (method, endpoint, data, callback) => {
 
             let m = method.toUpperCase()
@@ -66,6 +67,14 @@
                 if(err){
                     e = "error"
                 } else {
+                    res.data.children.forEach((p, i)=>{
+                        P_TYPES.forEach((t, ii)=>{
+                            if(t.id === p.kind){
+                                p.kind = t.name
+                                
+                            }
+                        },this)
+                    },this)
                     let response = {
                         posts : res.data.children,
                         after : res.data.after,

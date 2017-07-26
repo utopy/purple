@@ -9,6 +9,7 @@ const state = {
 
 const mutations = {
     ADD_SUBREDDIT (state, res) {
+        res.stored = Date.now()
         state.subreddits.push(res)
     },
     UPDATE_VIEW_POSTS (state, res){
@@ -28,6 +29,11 @@ const actions = {
         state.subreddits.forEach((s)=>{
             if(s.subreddit_name === name){
                 exists = true
+                console.log("exists")
+                console.log(s.created)
+                if(s.created + 10000 < Date.now()){
+                    console.log("old cache")
+                }
                 commit("UPDATE_VIEW_POSTS", s)
             }
         }, this)
@@ -38,6 +44,7 @@ const actions = {
                 } else {
                     console.log(res)
                     res.subreddit_name = name
+                    res.created = Date.now()
                     commit("ADD_SUBREDDIT", res)
                     commit("UPDATE_VIEW_POSTS", res)
                 }

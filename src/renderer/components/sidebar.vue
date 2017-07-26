@@ -1,9 +1,20 @@
 <template>
     <div class="content">
-        <div class="menu-item" v-for="o in options">
+        <div class="menu-item">
+            <div class="profile-container">
+                <div class="profile-image"></div>
+                <div class="info">
+                    UTOPY
+                </div>
+            </div>
+        </div>
+        <div class="menu-item" v-for="o in options" :class="{subreddits: o.name === 'subreddits'}">
             <p>{{upperCase(o.name)}}</p>
-            <div class="menu-voice" v-for="v in o.voices">
+            <div v-if="o.name!=='subreddits'"class="menu-voice" v-for="v in o.voices" :class="{active: $route.name === v}">
                 <router-link :to="v">{{capitalize(v)}}</router-link>
+            </div>
+            <div v-else class="menu-voice">
+                <a @click="loadFavoriteSubreddit(v)">{{capitalize(v)}}</a>
             </div>
         </div>
     </div>
@@ -25,28 +36,44 @@ export default {
     },
     capitalize(o){
         return o[0].toUpperCase() + o.slice(1, o.length)
+    },
+    loadFavoriteSubreddit(name){
+      this.$store.dispatch("getPosts", name)
     }
   }
 }
 </script>
 <style scoped>
+
+
+.profile-image{
+    width: 100px;
+    height: 100px;
+    background: #C32373;
+    border-radius: 50%
+}
+
+.info{
+    margin-top: 20px;
+    font-weight: bold;
+}
 .content{
     width: 200px;
-    height: 100%;
-    border-right: 2px solid #2F1847;
-    display: flex;
-    flex-direction: column;
-
+    height: 100vh;
+    /* border-right: 2px solid #2F1847; */
+    display: block;
     }
 
 .menu-item{
     width:100px;
     text-align: center;
     margin: auto;
+    margin-bottom: 50px;
 }
 
 .menu-item p {
     margin-top: 5px;
+    font-weight: bold;
     color: #2F1847;
 
 }
@@ -54,6 +81,10 @@ export default {
 .menu-voice{
     color: black;
     margin-top: 20px;
+    font-weight: 400;
+    font-size: 12px;
+    padding: 5px;
+    border: 1px solid white;
 }
 
 
@@ -63,5 +94,8 @@ a{
     text-decoration: none;
 }
 
+.active{
+    border: 1px solid #C32373;
+}
 
 </style>

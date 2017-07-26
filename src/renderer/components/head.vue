@@ -7,11 +7,18 @@
             <div class="button"></div>
         </div>
         <div class="title">
-            {{title}}
+            r/{{capitalize(title)}}
         </div>
+
+        <div class="save">
+            <span v-if="!isFavorite(title)" @click="$store.dispatch('favoriteSubreddit', title)">Save Shortcut</span>
+            <span v-else @click="$store.dispatch('unfavoriteSubreddit', title)">remove Shortcut</span>
+        </div>
+        
     </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name:"header",
     props: ["title"],
@@ -23,7 +30,13 @@ export default {
     methods:{
         search(){
             this.$emit("subredditSearch", this.input)
+        },
+        capitalize(o){
+        return o[0].toUpperCase() + o.slice(1, o.length)
         }
+    },
+    computed:{
+        ...mapGetters(['isFavorite'])
     }
 }
 </script>
@@ -68,5 +81,18 @@ export default {
         height: 30px;
         display: inline-block;
         background: #C32373
+    }
+
+    .title{
+        font-size: 25px;
+        font-weight: bold;
+        border-bottom: 2px solid #C32373;
+        display: inline;
+    }
+
+    .save{
+        float:right;
+        font-weight: 400;
+        font-size: 10px;
     }
 </style>

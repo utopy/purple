@@ -58,7 +58,7 @@ export default {
 <style>
 
     .main-wrapper{
-      background: #322836;
+      background: #D8D8D8;
     }
     .button{
         width: 150px;

@@ -29,11 +29,13 @@
     width: 200px;
     float: left;
     z-index: 102;
+    padding: 50px 0;
   }
 
   .wrapper{
     width: calc(100vw - 200px);
     position: absolute;
+    background: #D8D8D8;
     height: 100%;
     right: 0;
   }
@@ -58,8 +60,33 @@
 
 
 <style>
-  *{
+
+  @font-face {
+    font-family: Roboto;
+    font-weight: 900;
+    src: url('./assets/Roboto/Roboto-Black.ttf');
+  }
+
+  @font-face {
+    font-family: Roboto;
+    font-weight: Bold;
+    src: url('./assets/Roboto/Roboto-Bold.ttf');
+  }
+
+  @font-face {
+    font-family: Roboto;
+    font-weight: Normal;
+    src: url('./assets/Roboto/Roboto-Regular.ttf');
+  }
+
+  @font-face {
+    font-family: Roboto;
+    font-weight: 300;
+    src: url('./assets/Roboto/Roboto-Light.ttf');
+  }
+
+    *{
     margin: 0;
-    font-family: arial
+    font-family: Roboto;
   }
 </style>

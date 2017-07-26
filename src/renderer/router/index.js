@@ -7,7 +7,7 @@ export default new Router({
   routes: [
     {
       path: '/home',
-      name: 'landing-page',
+      name: 'home',
       component: require('@/components/index.vue')
     },
     {
