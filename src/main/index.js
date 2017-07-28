@@ -1,4 +1,12 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
+
+const RedditApi = require('reddit-oauth');
+let reddit = new RedditApi({
+    app_id: 'O6i2xiHdmo_ZXA',
+    app_secret: 'hzAu0NJUD6VIsRzTLUTTewOBQVs',
+    redirect_uri: 'your_app_redirect_uri'
+});
+
 
 /**
  * Set `__static` path to static files in production
@@ -43,4 +51,8 @@ app.on('activate', () => {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+ipcMain.on("openLogin",(e)=>{
+  console.log("porcoDIOOOO")
 })

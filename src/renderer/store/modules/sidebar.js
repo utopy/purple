@@ -8,6 +8,7 @@ const state = {
     }]
 }
 
+
 const mutations = {
     FAVORITE_SUBREDDIT(state, subreddit){
         state.options[1].voices.push(subreddit)

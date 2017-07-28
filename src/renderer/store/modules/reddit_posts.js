@@ -5,7 +5,7 @@ const state = {
     before: null,
     viewPosts:[],
     subreddits:[],
-    current: ""
+    current: "loading",
 }
 
 const mutations = {
@@ -24,6 +24,14 @@ const mutations = {
     },
     UPDATE_CURRENT (state, name){
         state.current = name
+    },
+    EXPAND_POST(state, index){
+        if(state.viewPosts[index].expanded){
+            state.viewPosts[index].expanded = false
+        } else {
+            state.viewPosts[index].expanded = true
+        }
+        console.log(state.viewPosts[index].expanded)
     }
 }
 
@@ -48,6 +56,9 @@ const actions = {
                     console.log(err)
                 } else {
                     console.log(res)
+                    res.posts.forEach((n)=>{
+                        n.expanded = false
+                    },this)
                     res.subreddit_name = name
                     res.created = Date.now()
                     commit("ADD_SUBREDDIT", res)
@@ -66,6 +77,12 @@ const actions = {
                 commit("LOAD_MORE_POSTS", res)
             }
         },{after: state.after})
+    },
+    expandPost({commit ,state}, index){
+       let post = state.viewPosts[index]
+       if(post.data.is_self && post.kind === "link"){
+            commit("EXPAND_POST", index)
+       }
     }
 }
 

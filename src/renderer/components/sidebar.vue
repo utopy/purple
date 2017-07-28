@@ -3,8 +3,8 @@
         <div class="menu-item">
             <div class="profile-container">
                 <div class="profile-image"></div>
-                <div class="info">
-                    UTOPY
+                <div class="info" @click="openLogin">
+                    LOGIN
                 </div>
             </div>
         </div>
@@ -13,13 +13,14 @@
             <div v-if="o.name!=='subreddits'"class="menu-voice" v-for="v in o.voices" :class="{active: $route.name === v}">
                 <router-link :to="v">{{capitalize(v)}}</router-link>
             </div>
-            <div v-else class="menu-voice" :class="{activeSub: $store.state.reddit_posts.current === v}">
-                <div @click="loadFavoriteSubreddit(v)">{{capitalize(v)}}</div>
+            <div v-else @click="loadFavoriteSubreddit(v)" class="menu-voice" :class="{activeSub: $store.state.reddit_posts.current === v}">
+                <div>{{capitalize(v)}}</div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import {ipcRenderer} from 'electron'
 import store from '@/store'
 export default {
   data(){
@@ -39,6 +40,9 @@ export default {
     },
     loadFavoriteSubreddit(name){
       this.$store.dispatch("getPosts", name)
+    },
+    openLogin(){
+        ipcRenderer.send("openLogin")
     }
   }
 }

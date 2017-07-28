@@ -50,6 +50,18 @@ export default {
   mounted(){
     let u = "node"
     this.$store.dispatch("getPosts", u)
+    
+  },
+  created(){
+    window.onbeforeunload = (e)=>{
+      let subs = this.$store.state.sidebar.options[1].voices
+      localStorage.setItem("voices", subs)
+    }
+
+    window.onload = (e)=>{
+      let v = localStorage.getItem("voices");
+      
+    }
   }
 
 }
