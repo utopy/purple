@@ -82,6 +82,8 @@ const actions = {
        let post = state.viewPosts[index]
        if(post.data.is_self && post.kind === "link"){
             commit("EXPAND_POST", index)
+       } else if(post.data.preview){
+           commit("EXPAND_POST", index)
        }
     }
 }
