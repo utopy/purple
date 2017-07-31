@@ -4,24 +4,8 @@
                     {{post.data.title}}
                 </p>
                 <div v-if="post.expanded" class="post-content">
-                    <span class="selftext" v-html="post.data.selftext_html">
+                    <span class="selftext" v-html="post.data.selftext">
                     </span>
-                </div>
-                <div class="button" v-if="post.data.num_comments !== 1">
-                    {{post.data.num_comments}} COMMENTS
-                </div>
-                <div class="button" v-else>
-                    {{post.data.num_comments}} COMMENT
-                </div>
-                <div class="button">
-                    SAVE POST
-                </div>
-                <div class="button">
-                    HIDE POST
-                </div>
-
-                <div class="button" style="float: right">
-                    Author: {{post.data.author}}
                 </div>
 </div>
 </template>
@@ -58,13 +42,4 @@ export default{
     }
 
     .selftext{}
-
-    .button{
-        padding: 5px 10px;
-        background:#E8E8E8;
-        display: inline-block;
-        font-size: 10px;
-        right: 0;
-        margin-top: 10px;
-    }
 </style>

@@ -32,6 +32,9 @@ const mutations = {
             state.viewPosts[index].expanded = true
         }
         console.log(state.viewPosts[index].expanded)
+    },
+    EXPAND_COMMENTS(state, index){
+        state.viewPosts[index].expand_comments = !state.viewPosts[index].expand_comments 
     }
 }
 
@@ -58,6 +61,7 @@ const actions = {
                     console.log(res)
                     res.posts.forEach((n)=>{
                         n.expanded = false
+                        n.expand_comments = false
                     },this)
                     res.subreddit_name = name
                     res.created = Date.now()
@@ -80,11 +84,12 @@ const actions = {
     },
     expandPost({commit ,state}, index){
        let post = state.viewPosts[index]
-       if(post.data.is_self && post.kind === "link"){
+       if(post.data.preview || post.data.is_self && post.kind === "link"){
             commit("EXPAND_POST", index)
-       } else if(post.data.preview){
-           commit("EXPAND_POST", index)
        }
+    },
+    expandComments({commit}, index){
+        commit("EXPAND_COMMENTS", index)
     }
 }
 

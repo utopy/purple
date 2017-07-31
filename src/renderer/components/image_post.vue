@@ -1,29 +1,12 @@
 <template>
-    <div>
-        <p class="title" @click="expand(i)">
-                    {{post.data.title}} + image {{post.expanded}}
-        </p>
-        <div v-if="post.expanded" class="post-content" @click="log(post)">
-            <img v-bind:src="post.data.preview.images['0'].source.url"></img>
-        </div>
-        <div class="button" v-if="post.data.num_comments !== 1">
-                    {{post.data.num_comments}} COMMENTS
-                </div>
-                <div class="button" v-else>
-                    {{post.data.num_comments}} COMMENT
-                </div>
-                <div class="button">
-                    SAVE POST
-                </div>
-                <div class="button">
-                    HIDE POST
-                </div>
-
-                <div class="button" style="float: right">
-                    Author: {{post.data.author}}
-                </div>
-
+<div>
+    <p class="title" @click="expand(i)">
+        {{post.data.title}} + image {{post.expanded}}
+    </p>
+    <div v-if="post.expanded" class="post-content" @click="log(post)">
+        <img v-bind:src="post.data.preview.images['0'].source.url"></img>
     </div>
+</div>
 </template>
 <script>
 export default{

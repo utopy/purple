@@ -7,20 +7,23 @@
             </div>
             <div class="post-wrapper" v-if="post.data.preview">
                 <imagePost v-bind:post="post" v-bind:i="i"></imagePost>
-            </div>   
+            </div>
+                <buttons v-bind:post="post" :i="i"></buttons>
+                <comments v-bind:post="post"></comments>
         </div>
     </div>
 </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 import selflink from './self_link.vue'
 import imagePost from './image_post.vue'
+import buttons from './buttons.vue'
+import comments from './comments.vue'
 import store from '@/store'
 export default {
     props: ["posts"],
     name: "posts",
-    components: {selflink, imagePost},
+    components: {selflink, imagePost, buttons, comments},
     data(){
         return{
 

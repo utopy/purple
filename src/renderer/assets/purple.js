@@ -86,6 +86,22 @@
             })
         }
 
+        _purple.getPostComments = function(postLink, callback, options){
+            let u = `https://www.reddit.com/${postLink}/.json`
+            if(options){
+                u += this.returnQuery(options)
+            }
+
+            request("GET", u, {}, (err, res)=>{
+                let e = null
+                if(err){
+                    e = "error"
+                } else{
+                    callback(e, res)
+                }
+            })
+        }
+
         _purple.searchSubreddit = function(query, callback){
             let u = "https://www.reddit.com/api/search_subreddit"
             u += this.returnQuery(query)
