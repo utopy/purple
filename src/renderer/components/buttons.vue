@@ -23,6 +23,7 @@ export default{
     props: ['post', 'i'],
     methods:{
         expand_comments(i){
+            this.$store.dispatch("clearComments")
             this.$store.dispatch("expandComments", i)
             this.$store.dispatch("loadComments", this.post.data.permalink)
         }

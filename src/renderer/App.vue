@@ -41,7 +41,7 @@
     right: 0;
   }
   .content{
-    display: inline-flex;
+    width:100vw;
     flex-direction: row;
     height: 100vh;
   }

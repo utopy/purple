@@ -16,6 +16,11 @@ export default new Router({
       component: require("@/components/new.vue")
     },
     {
+      path:"/reader/:url",
+      name:"reader",
+      component: require("@/components/reader.vue")
+    },
+    {
       path: '*',
       redirect: '/home'
     }

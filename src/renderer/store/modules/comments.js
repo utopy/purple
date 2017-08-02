@@ -18,10 +18,13 @@ const mutations = {
 const actions = {
     loadComments({commit}, permalink){
         purple.getPostComments(permalink, (err, res)=>{
-            let comments = res[1].data
+            let comments = res[1].data;
             commit("CLEAR_COMMENTS")
             commit("UPDATE_POST_COMMENTS", comments)
         })
+    },
+    clearComments({commit}){
+        commit("CLEAR_COMMENTS")
     }
 }
 

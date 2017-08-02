@@ -2,7 +2,6 @@
     <div class="content">
         <div class="menu-item">
             <div class="profile-container">
-                <div class="profile-image"></div>
                 <div class="info" @click="openLogin">
                     LOGIN
                 </div>
@@ -11,7 +10,7 @@
         <div class="menu-item" v-for="o in options" :class="{subreddits: o.name === 'subreddits'}">
             <p>{{upperCase(o.name)}}</p>
             <div v-if="o.name!=='subreddits'"class="menu-voice" v-for="v in o.voices" :class="{active: $route.name === v}">
-                <router-link :to="v">{{capitalize(v)}}</router-link>
+                <router-link :to="v" @click.native="log(v)">{{capitalize(v)}}</router-link>
             </div>
             <div v-else @click="loadFavoriteSubreddit(v)" class="menu-voice" :class="{activeSub: $store.state.reddit_posts.current === v}">
                 <div>{{capitalize(v)}}</div>
@@ -43,6 +42,10 @@ export default {
     },
     openLogin(){
         ipcRenderer.send("openLogin")
+    },
+    log(v){
+        console.log(v)
+       this.$router.push(`/${v}`)
     }
   }
 }

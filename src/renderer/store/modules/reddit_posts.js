@@ -3,6 +3,7 @@ import '@/assets/purple'
 const state = {
     after: null,
     before: null,
+    oldComments: 0,
     viewPosts:[],
     subreddits:[],
     current: "loading",
@@ -34,7 +35,12 @@ const mutations = {
         console.log(state.viewPosts[index].expanded)
     },
     EXPAND_COMMENTS(state, index){
-        state.viewPosts[index].expand_comments = !state.viewPosts[index].expand_comments 
+        console.log(state.oldComments)
+        if(state.viewPosts[state.oldComments].expand_comments) state.viewPosts[state.oldComments].expand_comments = false
+        if(state.oldComments !== index || state.viewPosts[state.oldComments]){
+            state.viewPosts[index].expand_comments = !state.viewPosts[index].expand_comments
+        }
+        state.oldComments = index
     }
 }
 
@@ -89,6 +95,7 @@ const actions = {
        }
     },
     expandComments({commit}, index){
+        console.log(index)
         commit("EXPAND_COMMENTS", index)
     }
 }
