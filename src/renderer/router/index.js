@@ -21,6 +21,21 @@ export default new Router({
       component: require("@/components/reader.vue")
     },
     {
+      path: "/saved-posts",
+      name: "Saved_Posts",
+      component: require("@/components/savedPosts.vue")
+    },
+    {
+      path: "/admin",
+      name: "Admin_Panel",
+      component: require("@/components/admin")
+    },
+    {
+      path: "/login",
+      name: "Login_Panel",
+      component: require("@/components/login")
+    },
+    {
       path: '*',
       redirect: '/home'
     }

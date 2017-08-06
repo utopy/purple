@@ -36,7 +36,6 @@
   .wrapper{
     width: calc(100vw - 200px);
     position: absolute;
-    background: #D8D8D8;
     height: 100%;
     right: 0;
   }

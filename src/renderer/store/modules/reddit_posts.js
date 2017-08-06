@@ -6,7 +6,9 @@ const state = {
     oldComments: 0,
     viewPosts:[],
     subreddits:[],
+    savedPosts: [],
     current: "loading",
+    isLoading: false
 }
 
 const mutations = {
@@ -18,6 +20,7 @@ const mutations = {
         state.after = res.after
         state.before = res.before
         state.viewPosts = [...res.posts]
+        state.current = res.subreddit_name
     },
     LOAD_MORE_POSTS (state, res){
         state.after = res.after;
@@ -36,11 +39,28 @@ const mutations = {
     },
     EXPAND_COMMENTS(state, index){
         console.log(state.oldComments)
-        if(state.viewPosts[state.oldComments].expand_comments) state.viewPosts[state.oldComments].expand_comments = false
-        if(state.oldComments !== index || state.viewPosts[state.oldComments]){
-            state.viewPosts[index].expand_comments = !state.viewPosts[index].expand_comments
+        state.viewPosts.forEach((p)=>{
+            p.expand_comments = false
+        },this)
+
+        if(state.viewPosts[index].expand_comments){
+            state.viewPosts[index].expand_comments = false
+            console.log("true")
+        }  else {
+            state.viewPosts[index].expand_comments = true
+            console.log('false')
         }
         state.oldComments = index
+    },
+    LOAD_SAVED_POSTS(state){
+        state.viewPosts = [...state.savedPosts]
+        state.current = 'Saved Posts'
+    },
+    SAVE_POST(state, index){
+        state.savedPosts.push(state.viewPosts[index])
+    },
+    CHANGE_LOADING_STATE(state){
+        state.isLoading = !state.isLoading
     }
 }
 
@@ -78,13 +98,16 @@ const actions = {
             })
         }
     },
-    loadMorePosts({commit}, name){
-        purple.getSubredditPosts(name, (err, res)=>{
+    loadMorePosts({commit}){
+        commit("CHANGE_LOADING_STATE")
+        purple.getSubredditPosts(state.current, (err, res)=>{
             if(err){
                 console.log(err)
             } else {
                 console.log(res)
                 commit("LOAD_MORE_POSTS", res)
+                commit("CHANGE_LOADING_STATE")
+
             }
         },{after: state.after})
     },
@@ -97,6 +120,12 @@ const actions = {
     expandComments({commit}, index){
         console.log(index)
         commit("EXPAND_COMMENTS", index)
+    },
+    savePost({commit}, index){
+        commit("SAVE_POST", index)
+    },
+    getSavedPosts({commit}){
+        commit("LOAD_SAVED_POSTS")
     }
 }
 
@@ -106,6 +135,15 @@ const getters = {
     },
     getCurrentTitle(state){
         return state.current
+    },
+    getSavedPostsLength(state){
+        return state.savedPosts.length
+    },
+    getSavedPosts(state){
+        return state.savedPosts
+    },
+    getLoadingState(state){
+        return state.isLoading
     }
 }
 

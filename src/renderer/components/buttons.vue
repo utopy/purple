@@ -6,12 +6,13 @@
     <div class="button" v-else @click="expand_comments(i)">
         {{post.data.num_comments}} COMMENT
     </div>
-    <div class="button">
+    <div class="button" @click="savePost(i)">
         SAVE POST
     </div>
     <div class="button">
         HIDE POST
     </div>
+
 
     <div class="button" style="float: right">
         Author: {{post.data.author}}
@@ -26,6 +27,9 @@ export default{
             this.$store.dispatch("clearComments")
             this.$store.dispatch("expandComments", i)
             this.$store.dispatch("loadComments", this.post.data.permalink)
+        },
+        savePost(i){
+            this.$store.dispatch("savePost", i)
         }
     }
 }

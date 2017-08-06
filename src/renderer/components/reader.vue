@@ -70,6 +70,16 @@ export default {
         margin: auto;
         
     }
+
+    .wrapper pre span{
+        max-width: 100%;
+        float: left;
+    }
+
+    .wrapper pre{
+        
+    }
+
 </style>
 
 
@@ -79,6 +89,12 @@ export default {
         font-size: 24px;
         font-weight: bold
     }
+
+    pre {
+        width: 100%;
+        text-align: center
+    }
+
 
     div{
     }
@@ -108,4 +124,13 @@ export default {
         background:#8B8B8B
 
     }
+
+    .wrapper *{
+        max-width:100%;
+        height:auto;
+        white-space:pre-line
+    }
+
+    
+    
 </style>

@@ -1,25 +1,36 @@
 <template>
     <div class="content">
-        <div class="menu-item">
-            <div class="profile-container">
-                <div class="info" @click="openLogin">
-                    LOGIN
-                </div>
-            </div>
+        <div class="bottom-bar">
+            <router-link to="admin">Admin</router-link>
         </div>
-        <div class="menu-item" v-for="o in options" :class="{subreddits: o.name === 'subreddits'}">
-            <p>{{upperCase(o.name)}}</p>
-            <div v-if="o.name!=='subreddits'"class="menu-voice" v-for="v in o.voices" :class="{active: $route.name === v}">
-                <router-link :to="v" @click.native="log(v)">{{capitalize(v)}}</router-link>
-            </div>
-            <div v-else @click="loadFavoriteSubreddit(v)" class="menu-voice" :class="{activeSub: $store.state.reddit_posts.current === v}">
-                <div>{{capitalize(v)}}</div>
-            </div>
-        </div>
+        <ul v-for="o in options" class="menu">
+            <!-- menu header text -->
+            <div class="divider" :data-content="upperCase(o.name)"></div>
+            <!-- menu item -->
+                <li v-if="o.name!== 'subreddits'" v-for="v in o.voices" class="menu-item">
+                    <router-link 
+                        :to="v" 
+                        @click.native="log(v)">{{capitalize(v)}}</router-link>
+                    
+                </li>
+                <li v-if="o.name === 'main'" class="menu-item">
+                    <router-link to="saved-posts">Saved <label class="label label-primary">{{getSavedPostsLength}}</label></router-link>
+                        
+                </li>
+                <li v-if=" o.name === 'subreddits'" 
+                    @click="loadFavoriteSubreddit(v)" 
+                    class="menu-item" 
+                    v-for="v in o.voices" 
+                    :class="{activeSub: $store.state.reddit_posts.current === v}">
+                    <a>{{capitalize(v)}}</a>
+                </li>
+            <!-- menu item with badge -->
+        </ul>
     </div>
 </template>
 <script>
 import {ipcRenderer} from 'electron'
+import { mapGetters } from 'vuex'
 import store from '@/store'
 export default {
   data(){
@@ -46,69 +57,66 @@ export default {
     log(v){
         console.log(v)
        this.$router.push(`/${v}`)
+    },
+    loadSavedPosts(){
+        this.$store.dispatch("getSavedPosts")
     }
+  },
+  computed:{
+      ...mapGetters(['getSavedPostsLength'])
   }
 }
 </script>
 <style scoped>
 
+.bottom-bar{
+    background: #4452c0;
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    z-index: 200;
+    bottom: 0;
 
-.profile-image{
-    width: 100px;
-    height: 100px;
-    background: #C32373;
-    border-radius: 50%
 }
 
-.info{
-    margin-top: 20px;
-    font-weight: bold;
+.bottom-bar *{
+    z-index: 201
 }
+
+ul{
+    box-shadow:none
+}
+
 .content{
     width: 200px;
-    height: 100vh;
+    height: 100%;
+    overflow-y:scroll;
     /* border-right: 2px solid #2F1847; */
-    display: block;
+    }
+
+    .menu{
+        z-index:101;
     }
 
 .menu-item{
     width:100px;
     text-align: center;
     margin: auto;
-    margin-bottom: 50px;
-}
-
-.menu-item p {
-    margin-top: 5px;
-    font-weight: bold;
-    color: #2F1847;
-
-}
-
-.menu-voice{
-    color: black;
-    margin-top: 20px;
-    font-weight: 400;
-    font-size: 12px;
-    padding: 5px;
-    border: 1px solid white;
-    cursor: pointer;
+    margin:20px auto;
 }
 
 
-a{
-    color: black;
-    margin-top: 5px;
-    text-decoration: none;
-}
+
+
 
 .active{
     border: 1px solid #C32373;
 }
 
 .activeSub{
-    border-left: 1px solid #C32373;
-    border-right: 1px solid #C32373
+    /* border-left: 1px solid #C32373;
+    border-right: 1px solid #C32373 */
+
 }
 
 </style>

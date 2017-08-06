@@ -4,12 +4,14 @@
                     {{post.data.title}}
                 </p>
                 <div v-if="post.expanded" class="post-content">
-                    <span class="selftext" v-html="post.data.selftext">
-                    </span>
+                    <div class="selftext">
+                        <span style="text-align:left; white-space:pre-wrap" v-html="convertText(post.data.selftext)"></span>
+                    </div>
                 </div>
 </div>
 </template>
 <script>
+import marked from 'marked'
 export default{
     props:['post', 'i'],
     name: "self_post",
@@ -21,10 +23,19 @@ export default{
     methods:{
         expand(i){
             this.$store.dispatch("expandPost", i)
+        },
+        convertText(text){
+            return marked(text)
         }
     }
 }
 </script>
+<style>
+    code{
+        width: 100%;
+        white-space: pre-wrap;
+    }
+</style>
 <style scoped>
 
     .infos{

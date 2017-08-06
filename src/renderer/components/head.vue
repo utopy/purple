@@ -1,11 +1,6 @@
 <template>
     <div class="container">
-        <div class="search-bar">
-            <div class="input">
-                <input type="text" v-model="input" v-on:keyup.enter="search">
-            </div>
-            <div class="button">Search</div>
-        </div>
+        <searchbar style="width: 100%;" :showButton="true" v-on:searchInput="loadPosts($event)"></searchbar>
         <div class="title">
             r/{{capitalize(getCurrentTitle)}}
         </div>
@@ -14,23 +9,26 @@
             <span v-if="!isFavorite(title)" @click="$store.dispatch('favoriteSubreddit', title)"><img width="10px"src="../assets/svg/plus.svg" alt=""></span>
             <span v-else @click="$store.dispatch('unfavoriteSubreddit', title)"><img width="10px"src="../assets/svg/menus.svg" alt=""></span>
         </div>
+
+        <div class="subreddit-infos"></div>
         
     </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import searchbar from '@/components/searchbar'
 export default {
     name:"header",
     props: ["title"],
+    components: {searchbar},
     data(){
         return{
-            input: ""
         }
     },
     methods:{
-        search(){
-            this.$emit("subredditSearch", this.input)
-            this.input=""
+        loadPosts(name){
+
+            this.$emit("subredditSearch", name)
         },
         capitalize(o){
         return o[0].toUpperCase() + o.slice(1, o.length)
@@ -48,7 +46,7 @@ export default {
         width: 80%;
         margin: auto;
         height: auto;
-        padding-bottom:40px;
+        padding-bottom:20px;
     }
 
     .search-bar{

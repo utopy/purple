@@ -1,6 +1,7 @@
 <template>
 <div class="container">
-    <div class="posts">
+    
+    <div class="posts" v-on:mouseenter="scrollable" v-on:mouseleave="scrollable":class="{scrollable:scroll}">
         <div class="post" v-for="(post, i) in posts">
             <div class="post-wrapper" v-if="post.data.is_self">
                 <selflink v-bind:post="post" v-bind:i="i"></selflink>
@@ -13,6 +14,8 @@
                     <router-link :to="changeUrl(post.data.url)">{{post.data.title}} - ext</router-link>
                 </p>
             </div>
+                <div class="subtitle">{{post.data.domain}} - {{convertDate(post.data.created_utc)}}</div>
+
                 <buttons v-bind:post="post" :i="i"></buttons>
                 <comments v-bind:post="post"></comments>
         </div>
@@ -20,6 +23,7 @@
 </div>
 </template>
 <script>
+import moment from 'moment'
 import selflink from './self_link.vue'
 import imagePost from './image_post.vue'
 import buttons from './buttons.vue'
@@ -32,20 +36,36 @@ export default {
     components: {selflink, imagePost, buttons, comments, externalLink},
     data(){
         return{
-
+            scroll: false,
         }
     },
     methods:{
+        scrollable(){
+                console.log("bella")
+                this.scroll = !this.scroll
+            },
         changeUrl(url){
             let u = url.replace(/\//g, "_");
             return `reader/${u}`
+        },
+        convertDate(date){
+            let d = (new Date(date * 1000));
+            d = moment.utc(d).local().format("HH:mm DD/MM/YYYY")
+            return d
         }
+    },
+    computed:{
     }
+
 }
 </script>
 <style scoped>
+    .scrollable{
+        overflow-y: scroll
+    }
     .container{
         width: 100%;
+        height: 100%;
     }
 
     .post-title{
@@ -57,7 +77,7 @@ export default {
     }
 
     .posts{
-        overflow-y: scroll;
+        overflow-y: hidden;
     }
     .post{
         min-height: 60px;
@@ -66,6 +86,8 @@ export default {
         background-color: #F4F4F4;
         margin: auto;
         margin-bottom: 30px;  
-        border-bottom: 2px solid #E71AEF; 
+    }
+    .subtitle{
+        font-size: 10px;
     }
 </style>

@@ -5,12 +5,15 @@
 
             let m = method.toUpperCase()
             let req = new XMLHttpRequest()
-            let d = data || {}
+            let d = data
             let err = null
 
             req.open(m, endpoint, true)
             if (m !== "POST" && m !== "GET") {
                 return "invalid request method, only get or post are allowed"
+            }
+            if(m === "POST"){
+                req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
             }
             req.onload = function () {
                 if (req.status >= 200 && req.status < 400) {
@@ -30,14 +33,32 @@
                 err = "connection error"
                 callback(err)
             };
-
-            req.send(d);
+            if(data){
+                if(m== "POST"){
+                    req.send(JSON.stringify(d))
+                } else {
+                    req.send(d);
+                }
+            }
+            
+            
         }
 
         let _purple = {}
+
+        _purple.request = request
+        
         _purple.list = function(){
             console.log(this)
         }
+
+        _purple.timeOutId = null
+
+        _purple.delay = function(callback,milliseconds){
+            clearTimeout(this.timeOutId);
+            this.timeOutId = setTimeout(callback, milliseconds)
+        }
+        
 
         _purple.returnQuery = function(query){
             let u = "?"
@@ -103,9 +124,16 @@
         }
 
         _purple.searchSubreddit = function(query, callback){
-            let u = "https://www.reddit.com/api/search_subreddit"
+            let u = "https://www.reddit.com/subreddits/search/.json"
             u += this.returnQuery(query)
-            request("POST", u, {}, )
+            request("GET", u, {}, (err, res)=>{
+                let e = null
+                if(err){
+                    e = "error"
+                } else {
+                    callback(e, res)
+                }
+            })
         }
 
 

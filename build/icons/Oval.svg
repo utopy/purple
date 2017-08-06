@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024px" height="1024px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Oval</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="98.6906091%" id="linearGradient-1">
+            <stop stop-color="#909EE5" offset="0%"></stop>
+            <stop stop-color="#7B57C6" offset="100%"></stop>
+        </linearGradient>
+        <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="100%" id="radialGradient-2">
+            <stop stop-color="#909EE5" offset="0%"></stop>
+            <stop stop-color="#5764C6" offset="51.3751594%"></stop>
+        </radialGradient>
+        <circle id="path-3" cx="512" cy="512" r="512"></circle>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="1024" height="1024" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <path d="M512,978 C769.364693,978 978,769.364693 978,512 C978,254.635307 769.364693,46 512,46 C254.635307,46 46,254.635307 46,512 C46,769.364693 254.635307,978 512,978 Z" id="path-5"></path>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="932" height="932" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+        <path d="M512,942.448758 C749.730285,942.448758 942.448758,749.730285 942.448758,512 C942.448758,274.269715 749.730285,81.5512418 512,81.5512418 C274.269715,81.5512418 81.5512418,274.269715 81.5512418,512 C81.5512418,749.730285 274.269715,942.448758 512,942.448758 Z" id="path-7"></path>
+        <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="860.897516" height="860.897516" fill="white">
+            <use xlink:href="#path-7"></use>
+        </mask>
+        <path d="M822.742517,524.505327 C821.723617,550.26976 817.570278,575.228464 810.653296,599.010645 L213.3467,599.010645 C206.429721,575.228464 202.276383,550.26976 201.257483,524.505327 L822.742517,524.505322 Z M819.230631,463.505322 C813.789641,428.756984 802.594883,395.91651 786.651766,365.989311 L237.34821,365.989355 C221.405117,395.91651 210.210359,428.756984 204.769369,463.505322 L819.230631,463.505322 Z M744.083833,719.010666 C762.808677,698.03257 778.731575,674.499769 791.264766,649.000023 L232.735222,649 C245.268425,674.499769 261.191323,698.03257 279.916167,719.010666 L744.083851,719.010645 Z M687.168631,769 C637.282368,803.067735 576.967656,822.989355 512,822.989355 C447.032344,822.989355 386.717631,803.067735 336.831369,769 L687.168631,769 Z M753.463487,316 C696.44273,245.83887 609.456461,201.010645 512,201.010645 C414.543538,201.010645 327.55727,245.83887 270.536512,316 L753.463487,316 Z" id="path-9"></path>
+        <mask id="mask-10" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="621.485034" height="621.97871" fill="white">
+            <use xlink:href="#path-9"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Custom-Preset" stroke-width="40">
+            <use id="Oval" stroke="url(#radialGradient-2)" mask="url(#mask-4)" fill="url(#linearGradient-1)" xlink:href="#path-3"></use>
+            <use id="Combined-Shape" stroke="#8D94E0" mask="url(#mask-6)" fill="#FFFFFF" xlink:href="#path-5"></use>
+            <use id="Combined-Shape-Copy" stroke="#8D94E0" mask="url(#mask-8)" fill="url(#linearGradient-1)" xlink:href="#path-7"></use>
+            <use id="Combined-Shape" stroke="#8D94E0" mask="url(#mask-10)" fill="#FFFFFF" transform="translate(512.000000, 512.000000) rotate(180.000000) translate(-512.000000, -512.000000) " xlink:href="#path-9"></use>
+        </g>
+    </g>
+</svg>
